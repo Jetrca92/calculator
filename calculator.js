@@ -25,7 +25,7 @@ function operate(operator, x, y) {
             return parseFloat((add(x, y)).toFixed(5));
         case "-":
             return parseFloat((substract(x, y)).toFixed(5));
-        case "x":
+        case "×":
             return parseFloat((multiply(x, y)).toFixed(5));
         case "÷":
             return parseFloat((divide(x, y)).toFixed(5));
@@ -54,12 +54,24 @@ buttons.forEach(button => button.addEventListener('click', function () {
     if (operator) {
         screenSmall.innerHTML = displayValue + " " + operator;
         screenLarge.innerHTML = displayValue;
-        op = operator;
+        
         
         // Store numbers before the operator as x, clear displayValue
         if (!x) {
+            op = operator;
             x = parseFloat(displayValue);
             displayValue = "";
+        }
+        // Logic for stringin together several operators
+        else {
+            y = parseFloat(displayValue);
+            displayValue = operate(op, x, y);
+            screenLarge.innerHTML = displayValue;
+            screenSmall.innerHTML = displayValue + " " + operator;
+            y = undefined;
+            x = displayValue;
+            displayValue = "";
+            op = operator;
         }
     }
     if (button.id === "equalsBtn") {
@@ -94,8 +106,8 @@ buttons.forEach(button => button.addEventListener('click', function () {
 
     // Delete 
     if (button.id === "deleteBtn") {
-        screenLarge.innerHTML = "";
-        displayValue = "";
+        displayValue = displayValue.slice(0, -1);
+        screenLarge.innerHTML = displayValue;
     }
     
 }));
