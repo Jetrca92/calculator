@@ -65,7 +65,7 @@ buttons.forEach(button => button.addEventListener('click', function () {
         // Logic for stringin together several operators
         else {
             y = parseFloat(displayValue);
-            displayValue = operate(op, x, y);
+            displayValue = operate(op, x, y).toString();
             screenLarge.innerHTML = displayValue;
             screenSmall.innerHTML = displayValue + " " + operator;
             y = undefined;
@@ -76,12 +76,12 @@ buttons.forEach(button => button.addEventListener('click', function () {
     }
     if (button.id === "equalsBtn") {
         // Prevents error from presing equalsBtn many times
-        if (!op) {
+        if (!op && !x && !y) {
             return;
         }
         // Store y
         y = parseFloat(displayValue);
-        displayValue = operate(op, x, y);
+        displayValue = operate(op, x, y).toString();
         screenLarge.innerHTML = displayValue;
         screenSmall.innerHTML = x + " " + op + " " + y + " = " + displayValue; 
         y = undefined;
