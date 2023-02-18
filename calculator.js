@@ -54,8 +54,10 @@ buttons.forEach(button => button.addEventListener('click', function () {
         op = operator;
         
         // Store numbers before the operator as x, clear displayValue
-        x = parseFloat(displayValue);
-        displayValue = "";
+        if (!x) {
+            x = parseFloat(displayValue);
+            displayValue = "";
+        }
     }
     if (button.id === "equalsBtn") {
         // Prevents error from presing equalsBtn many times
@@ -68,7 +70,7 @@ buttons.forEach(button => button.addEventListener('click', function () {
         screenLarge.innerHTML = displayValue;
         screenSmall.innerHTML = x + " " + op + " " + y + " = " + displayValue; 
         y = undefined;
-        op = undefined;
+        x = undefined;
     }
 
     // Dot button
@@ -91,7 +93,6 @@ buttons.forEach(button => button.addEventListener('click', function () {
     if (button.id === "deleteBtn") {
         screenLarge.innerHTML = "";
         displayValue = "";
-        x = undefined;
     }
     
 }));
