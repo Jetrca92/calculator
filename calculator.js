@@ -17,18 +17,21 @@ function divide(x, y) {
 
 // Calls functions for different operators
 function operate(operator, x, y) {
-    if (operator === "+") {
-        return parseFloat((add(x, y)).toFixed(5));
+    if (operator === "÷" && y === 0) {
+        return alert("You can't divide by zero!");
     }
-    else if (operator === "-") {
-        return parseFloat((substract(x, y)).toFixed(5));
+    switch(operator) {
+        case "+":
+            return parseFloat((add(x, y)).toFixed(5));
+        case "-":
+            return parseFloat((substract(x, y)).toFixed(5));
+        case "x":
+            return parseFloat((multiply(x, y)).toFixed(5));
+        case "÷":
+            return parseFloat((divide(x, y)).toFixed(5));
+        default:
+            throw new Error(`Invalid operator: ${operator}`);
     }
-    else if (operator === "x") {
-        return parseFloat((multiply(x, y)).toFixed(5));
-    }
-    else if (operator === "÷") {
-        return parseFloat((divide(x, y)).toFixed(5));
-    } 
 }
 
 // Add event listeners to buttons, store data in variables and display on screen
